@@ -1,0 +1,19 @@
+name: Deploy to devops-server
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Pull latest image
+        run: |
+          cd /home/ubuntu/app
+          docker compose pull
+
+      - name: Restart services
+        run: |
+          cd /home/ubuntu/app
+          docker compose up -d
